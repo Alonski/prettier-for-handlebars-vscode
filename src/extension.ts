@@ -18,23 +18,26 @@ function fullDocumentRange(document: TextDocument): Range {
     const lastLineId = document.lineCount - 1;
     return new Range(0, 0, lastLineId, document.lineAt(lastLineId).text.length);
 }
+
+const prettierOptions = {
+    parser: 'glimmer',
+    "printWidth": 120
+};
+
 class PrettierHandlebarsFormatter implements DocumentFormattingEditProvider, DocumentRangeFormattingEditProvider {
     provideDocumentRangeFormattingEdits(document: TextDocument, range: Range, options: FormattingOptions, token: CancellationToken): ProviderResult<TextEdit[]> {
-        const text = document.getText(range);
-        const prettierOptions = {
-            parser: 'glimmner'
+        const { activeTextEditor } = vscode.window;
+        if (activeTextEditor && activeTextEditor.document.languageId === 'handlebars') {
+            const text = document.getText(range);
+            const formatted = prettier.format(text, prettierOptions);
+            return [TextEdit.replace(range, formatted)];
         }
-        const formatted = prettier.format(text, prettierOptions);
-        return [TextEdit.replace(range, formatted)];
     }
     provideDocumentFormattingEdits(document: TextDocument, options: FormattingOptions, token: CancellationToken): ProviderResult<TextEdit[]> {
         const { activeTextEditor } = vscode.window;
         if (activeTextEditor && activeTextEditor.document.languageId === 'handlebars') {
-            const options = {
-                parser: 'glimmer',
-            };
             const text = document.getText();
-            const formatted = prettier.format(text, options);
+            const formatted = prettier.format(text, prettierOptions);
             const range = fullDocumentRange(document);
             return [TextEdit.replace(range, formatted)];
         }
