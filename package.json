@@ -1,37 +1,43 @@
 {
-    "name": "prettier-for-handlebars-vscode",
-    "displayName": "Prettier for Handlebars",
-    "description": "Prettier formatting for Handlebars files",
-    "version": "0.0.1",
-    "publisher": "alonski",
-    "repository": "https://github.com/Alonski/prettier-for-handlebars-vscode.git",
-    "engines": {
-        "vscode": "^1.25.0"
-    },
-    "categories": [
-        "Formatters"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./out/extension",
-    "contributes": {},
-    "scripts": {
-        "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
-        "watch": "tsc -watch -p ./",
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "npm run compile && node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/mocha": "5.2.7",
-        "@types/node": "12.7.1",
-        "tslint": "5.18.0",
-        "typescript": "3.5.3",
-        "vscode": "1.1.36"
-    },
-    "dependencies": {
-        "@types/prettier": "^1.18.1",
-        "prettier": "^1.18.2"
-    }
+  "name": "prettier-for-handlebars-vscode",
+  "displayName": "Prettier for Handlebars",
+  "description": "Prettier formatting for Handlebars files - Clone of handlebars-formatter",
+  "version": "1.0.0",
+  "publisher": "alonski",
+  "repository": "https://github.com/Alonski/prettier-for-handlebars-vscode.git",
+  "engines": {
+    "vscode": "^1.40.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension",
+  "contributes": {},
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "copyFixtures": "cp -R ./test-fixtures ./out/test/suite/",
+    "pretest": "npm run compile && npm run copyFixtures",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^8.0.1",
+    "@types/glob": "^7.1.1",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^10.17.6",
+    "@types/vscode": "^1.40.0",
+    "glob": "^7.1.6",
+    "mocha": "^6.2.2",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2",
+    "vscode-test": "^1.2.3"
+  },
+  "dependencies": {
+    "@types/prettier": "^1.19.0",
+    "prettier": "^1.19.1"
+  }
 }
