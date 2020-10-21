@@ -3,8 +3,8 @@
   "displayName": "Prettier for Handlebars",
   "description": "Prettier formatting for Handlebars files - Clone of handlebars-formatter",
   "version": "2.0.1",
-  "publisher": "alonski",
-  "repository": "https://github.com/Alonski/prettier-for-handlebars-vscode.git",
+  "publisher": "embertooling",
+  "repository": "https://github.com/ember-tooling/prettier-for-handlebars-vscode.git",
   "engines": {
     "vscode": "^1.48.0"
   },
